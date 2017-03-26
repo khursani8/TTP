@@ -1,13 +1,29 @@
 <ion-view title="My Car" id="page4">
-  <ion-content padding="true" class="has-header">
-    <ion-list id="myCar-list4">
-      <ion-item id="myCar-list-item12">WWW 8888
-        <ion-option-button class="button-assertive">Remove</ion-option-button>
-      </ion-item>
-      <ion-item id="myCar-list-item13">AKB 2048
-        <ion-option-button class="button-assertive">Remove</ion-option-button>
-      </ion-item>
-    </ion-list>
-    <button id="myCar-button5" class="button button-positive  button-block">Add new</button>
-  </ion-content>
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-content padding="true" class="has-header">
+		<label class="item item-input item-select">
+    <div class="input-label">
+      Default Car
+    </div>
+    <select>
+      <option>WAA 1111</option>
+      <option selected>WWW 8888</option>
+      <option>AKB 2048</option>
+    </select>
+		</label>
+		<div class="item item-divider">
+			My Cars
+		</div>
+		<ion-list id="myCar-list4">
+			<ion-item id="myCar-list-item12">WWW 8888
+				<ion-option-button class="button-assertive">Remove</ion-option-button>
+			</ion-item>
+			<ion-item id="myCar-list-item13">AKB 2048
+				<ion-option-button class="button-assertive">Remove</ion-option-button>
+			</ion-item>
+		</ion-list>
+		<button id="myCar-button5" class="button button-positive  button-block">Add new</button>
+	</ion-content>
 </ion-view>

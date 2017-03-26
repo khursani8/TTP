@@ -7,35 +7,53 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
-
-  .state('myProfile', {
-    url: '/myProfile',
-    templateUrl: 'templates/myProfile.html',
-    controller: 'myProfileCtrl'
-  })
-
-  .state('newParking', {
+  .state('app', {
+		url: '/app',
+		abstract: true,
+		templateUrl: 'templates/menu.html',
+		controller: 'appCtrl'
+	})
+     
+  .state('app.newParking', {
     url: '/newParking',
-    templateUrl: 'templates/newParking.html',
-    controller: 'newParkingCtrl'
+    views: {
+			'menuContent' :{
+				templateUrl: 'templates/newParking.html',
+				controller: 'newParkingCtrl'
+			}
+		}
   })
 
-	.state('extendParking', {
-    url: '/extendParking',
-    templateUrl: 'templates/extendParking.html',
-    controller: 'extendParkingCtrl'
+  .state('app.myProfile', {
+		url: '/myProfile',
+    views: {
+			'menuContent' :{
+				templateUrl: 'templates/myProfile.html',
+				controller: 'myProfileCtrl'
+			}
+		}
   })
 
-	.state('myCar', {
-    url: '/myCar',
-    templateUrl: 'templates/myCar.html',
-    controller: 'myCarCtrl'
+	.state('app.extendParking', {
+		url: '/extendParking',
+    views: {
+			'menuContent' :{
+				templateUrl: 'templates/extendParking.html',
+				controller: 'extendParkingCtrl'
+			}
+		}
   })
 
-$urlRouterProvider.otherwise('/myProfile')
+	.state('app.myCar', {
+		url: '/myCar',
+    views: {
+			'menuContent' :{
+				templateUrl: 'templates/myCar.html',
+				controller: 'myCarCtrl'
+			}
+		}
+  })
 
-  
+$urlRouterProvider.otherwise('/app/myProfile')
 
 });

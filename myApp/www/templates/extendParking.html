@@ -1,27 +1,28 @@
 <ion-view title="Extend Parking" id="page3">
-  <ion-content padding="true" class="has-header">
-    <div id="extendParking-container6">
-      <form id="extendParking-form15" class="list">
-        <label class="item item-select" id="extendParking-select8">
-          <span class="input-label">Car plate number</span>
-          <select></select>
-        </label>
-      </form>
-    </div>
-    <form id="extendParking-form16" class="list">
-      <label class="item item-input" id="extendParking-input10">
-        <span class="input-label">Parking Lot</span>
-        <input type="text" placeholder="">
-      </label>
-      <label class="item item-input" id="extendParking-input11">
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-content padding="true" class="has-header">
+		<form id="extendParking-form15" class="list">
+			<label class="item item-input item-select">
+				<div class="input-label">
+					Plate number
+				</div>
+				<select>
+					<option>WAA 1111</option>
+					<option selected>WWW 8888</option>
+					<option>AKB 2048</option>
+				</select>
+			</label>
+			<label class="item item-input" id="extendParking-input11">
         <span class="input-label">Add Time</span>
         <input type="number" placeholder="">
       </label>
-      <label class="item item-input" id="extendParking-input14">
+			<label class="item item-input" id="extendParking-input14">
         <span class="input-label">Total</span>
         <input type="number" placeholder="">
       </label>
-    </form>
-    <a ui-sref="newParking" id="extendParking-button4" class="button button-positive  button-block">Tap me!</a>
-  </ion-content>
+		</form>
+		<a ui-sref="newParking" id="extendParking-button4" class="button button-positive  button-block">Submit</a>
+	</ion-content>
 </ion-view>
