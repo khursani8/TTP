@@ -1,40 +1,42 @@
 <ion-view title="New Parking" id="page1">
   <ion-content padding="true" class="has-header">
-    <div id="newParking-container5" class="col green-color">
+    <div id="newParking-container5" class="col">
       <form id="newParking-form11" class="list">
         <label class="item item-select" id="newParking-select6">
           <span class="input-label">Car plate number</span>
           <select></select>
         </label>
-        <div class="spacer" style="width: 300px; height: 14px;"></div>
+        
         
         <label class="item item-input" id="newParking-input6">
           <span class="input-label">Location</span>
           <input type="text" placeholder="" ng-model="parking.location" ng-init="parking.location='123.11,89.09'">
         </label>
-        <div class="spacer" style="width: 300px; height: 14px;"></div>
+        
         
         <label class="item item-input" id="newParking-input7">
           <span class="input-label">Parking Lot</span>
           <input type="text" placeholder="" ng-model="parking.parkingLot" >
         </label>
-        <div class="spacer" style="width: 300px; height: 14px;"></div>
+        
         
         <label class="item item-input" id="newParking-input8">
           <span class="input-label">Set Time</span>
           <input type="number" placeholder="" ng-model="parking.time" ng-init="parking.time=30">
         </label>
-        <div class="spacer" style="width: 300px; height: 14px;"></div>
         
-        <label class="item item-input disabled" id="newParking-input9">
+        
+        <label class="item item-input" id="newParking-input9">
           <span class="input-label">Total</span>
           <input type="number" placeholder="" ng-model="parking.price" ng-init="parking.price=30">
         </label>
+
+				<div id="newParking-container2" class="row">
+					<button id="newParking-button1" class="button button-positive  button-block button-outline col button-margin" type="reset">Clear</button>
+					<button id="newParking-button3" class="button button-positive  button-block col button-margin" ng-click="createParking(parking)">Next</button>
+				</div>
       </form>
     </div>
-    <div id="newParking-container2" class="row">
-      <button id="newParking-button1" class="button button-positive  button-block button-outline col button-margin">Clear</button>
-      <button id="newParking-button3" class="button button-positive  button-block col button-margin" ng-click="createParking(parking)">Next</button>
-    </div>
+    
   </ion-content>
 </ion-view>

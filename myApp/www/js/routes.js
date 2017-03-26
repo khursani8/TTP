@@ -10,17 +10,28 @@ angular.module('app.routes', [])
     
   
 
-  
+  .state('myProfile', {
+    url: '/myProfile',
+    templateUrl: 'templates/myProfile.html',
+    controller: 'myProfileCtrl'
+  })
+
   .state('newParking', {
     url: '/newParking',
     templateUrl: 'templates/newParking.html',
     controller: 'newParkingCtrl'
   })
 
-  .state('myProfile', {
-    url: '/myProfile',
-    templateUrl: 'templates/myProfile.html',
-    controller: 'myProfileCtrl'
+	.state('extendParking', {
+    url: '/extendParking',
+    templateUrl: 'templates/extendParking.html',
+    controller: 'extendParkingCtrl'
+  })
+
+	.state('myCar', {
+    url: '/myCar',
+    templateUrl: 'templates/myCar.html',
+    controller: 'myCarCtrl'
   })
 
 $urlRouterProvider.otherwise('/myProfile')
