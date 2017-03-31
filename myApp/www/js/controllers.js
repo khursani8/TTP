@@ -17,7 +17,6 @@ function ($scope, $stateParams,$http) {
 }}])
    
 .controller('myProfileCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-<<<<<<< Updated upstream
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http) {
@@ -29,16 +28,11 @@ function ($scope, $stateParams,$http) {
 }])
  
 .controller('extendParkingCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-=======
->>>>>>> Stashed changes
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http) {
-    $scope.user = {}
-    $http.get('http://localhost:3000/api/users/'+'shahril@moefi.xyz').then((user)=>{
-            $scope.user = user.data[0];
-            console.log(user.data[0]);
-        })
+function ($scope, $stateParams) {
+
+
 }])
    
 .controller('myCarCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
