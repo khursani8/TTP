@@ -6,7 +6,8 @@ import mongoose, {Schema} from 'mongoose';
 import {registerEvents} from './user.events';
 
 var UserSchema = new Schema({
-  name: String,
+  fname: String,
+  lname:String,
   email: {
     type: String,
     lowercase: true,

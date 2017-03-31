@@ -30,6 +30,14 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
+export function indexUser(req, res) {
+  return User.find({email:req.params.email}, '-salt -password').exec()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(handleError(res));
+}
+
 /**
  * Creates a new user
  */
