@@ -13,7 +13,7 @@ angular.module('app.routes', [])
 		templateUrl: 'templates/menu.html',
 		controller: 'appCtrl'
 	})
-     
+
   .state('app.newParking', {
     url: '/newParking',
     views: {
@@ -50,6 +50,56 @@ angular.module('app.routes', [])
 			'menuContent' :{
 				templateUrl: 'templates/myCar.html',
 				controller: 'myCarCtrl'
+			}
+		}
+  })
+
+	.state('app.nfc', {
+    url: '/nfc',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/nfc.html',
+				controller: 'nfcCtrl'
+			}
+		}
+  })
+
+  .state('app.login', {
+    url: '/login',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/login.html',
+				controller: 'loginCtrl'
+			}
+		}
+  })
+
+  .state('app.signup', {
+    url: '/signup',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/signup.html',
+				controller: 'signupCtrl'
+			}
+		}
+  })
+
+  .state('app.parkingHistory', {
+    url: '/history',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/parkingHistory.html',
+				controller: 'parkingHistoryCtrl'
+			}
+		}
+  })
+
+  .state('app.paymentOption', {
+    url: '/paymentOption',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/paymentOption.html',
+				controller: 'paymentOptionCtrl'
 			}
 		}
   })
