@@ -14,6 +14,7 @@ import uiBootstrap from 'angular-ui-bootstrap';
 
 // New Page
 import ParkingComponent from './parking/parking.component';
+import CarComponent from './car/car.component';
 
 
 import {
@@ -34,7 +35,7 @@ import './app.scss';
 
 angular.module('ttpApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, navbar, footer, main, constants, socket, util,
-  ParkingComponent,
+  ParkingComponent,CarComponent
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

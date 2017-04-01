@@ -11,6 +11,10 @@ export class NavbarComponent {
     {
     title: 'Parking',
     state: 'parking'
+    },
+    {
+    title: 'Car',
+    state: 'car'
     }
   ];
 

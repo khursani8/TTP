@@ -12,7 +12,7 @@ function ($scope, $stateParams,$http,$cordovaGeolocation) {
         location:''
     }
 
-    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    var posOptions = {timeout: 10000, enableHighAccuracy: true};
     $cordovaGeolocation
         .getCurrentPosition(posOptions)
         .then(function (position) {
@@ -21,7 +21,8 @@ function ($scope, $stateParams,$http,$cordovaGeolocation) {
         $scope.parking.location = $scope.lat+','+$scope.long;
         }, function(err) {
         // error
-        alert('cannot get loc',err)
+        alert(err)
+        console.table('loc err',err.PositionError)
         });
     $http.get('http://localhost:3000/api/cars/ownerId/'+'58dfe8f77ab2422ad0be13ba')
         .then(function(res){
