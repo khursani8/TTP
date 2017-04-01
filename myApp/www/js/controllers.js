@@ -18,7 +18,7 @@ function ($scope, $stateParams,$http,$cordovaGeolocation) {
         .then(function (position) {
         $scope.lat  = position.coords.latitude
         $scope.long = position.coords.longitude
-        $scope.parking.location = $scope.lat+','+$scope.long    
+        $scope.parking.location = $scope.lat+','+$scope.long;
         }, function(err) {
         // error
         alert('cannot get loc',err)
