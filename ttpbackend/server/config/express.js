@@ -19,6 +19,8 @@ import passport from 'passport';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
+var cors = require('cors')
+
 var MongoStore = connectMongo(session);
 
 export default function(app) {
@@ -33,6 +35,7 @@ export default function(app) {
   }
 
   app.set('appPath', path.join(config.root, 'client'));
+  app.use(cors())
   app.use(express.static(app.get('appPath')));
   app.use(morgan('dev'));
 

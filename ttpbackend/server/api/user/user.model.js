@@ -18,7 +18,7 @@ var UserSchema = new Schema({
   },
   driverLicense:{
     type:String,
-    required:true
+    required:false
   },
   phoneNumber:{
     type:String,
