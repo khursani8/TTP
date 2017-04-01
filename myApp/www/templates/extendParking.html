@@ -8,19 +8,17 @@
 				<div class="input-label">
 					Plate number
 				</div>
-				<select>
-					<option>WAA 1111</option>
-					<option selected>WWW 8888</option>
-					<option>AKB 2048</option>
-				</select>
+				<select ng-model="myCar.model">
+						<option ng-repeat="car in myCar" ng-selected="{{car.primary}}">{{car.plateno}}</option>
+					</select>
 			</label>
 			<label class="item item-input" id="extendParking-input11">
         <span class="input-label">Add Time</span>
-        <input type="number" placeholder="">
+        <input type="number" placeholder="00" ng-model="parking.time" ng-init="parking.time=1">
       </label>
 			<label class="item item-input" id="extendParking-input14">
         <span class="input-label">Total</span>
-        <input type="number" placeholder="">
+        <p type="number" >{{parking.time*2.4}}</p>
       </label>
 		</form>
 		<a ui-sref="newParking" id="extendParking-button4" class="button button-positive  button-block">Submit</a>

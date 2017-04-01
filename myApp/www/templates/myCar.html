@@ -7,20 +7,15 @@
     <div class="input-label">
       Default Car
     </div>
-    <select>
-      <option>WAA 1111</option>
-      <option selected>WWW 8888</option>
-      <option>AKB 2048</option>
-    </select>
+    <select ng-model="myCar.model">
+						<option ng-repeat="car in myCar" ng-selected="{{car.primary}}">{{car.plateno}}</option>
+		</select>
 		</label>
 		<div class="item item-divider">
 			My Cars
 		</div>
 		<ion-list id="myCar-list4">
-			<ion-item id="myCar-list-item12">WWW 8888
-				<ion-option-button class="button-assertive">Remove</ion-option-button>
-			</ion-item>
-			<ion-item id="myCar-list-item13">AKB 2048
+			<ion-item ng-repeat="car in myCar">{{car.plateno}}
 				<ion-option-button class="button-assertive">Remove</ion-option-button>
 			</ion-item>
 		</ion-list>

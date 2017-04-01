@@ -44,22 +44,31 @@ function ($scope, $stateParams,$http,$cordovaGeolocation) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-
+    
 
 }])
  
-.controller('extendParkingCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('extendParkingCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http) {
 
-
+$http.get('http://localhost:3000/api/cars/ownerId/'+'58dfe8f77ab2422ad0be13ba')
+        .then(function(res){
+            console.log(res.data[0].carList);
+            $scope.myCar = res.data[0].carList;
+        })
 }])
    
-.controller('myCarCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('myCarCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http) {
 
 
+$http.get('http://localhost:3000/api/cars/ownerId/'+'58dfe8f77ab2422ad0be13ba')
+        .then(function(res){
+            console.log(res.data[0].carList);
+            $scope.myCar = res.data[0].carList;
+        })
 }])
