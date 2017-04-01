@@ -8,16 +8,21 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,$cordovaGeolocation) {
 
+    $scope.parking = {
+        location:''
+    }
+
     var posOptions = {timeout: 10000, enableHighAccuracy: false};
     $cordovaGeolocation
         .getCurrentPosition(posOptions)
         .then(function (position) {
-        var lat  = position.coords.latitude
-        var long = position.coords.longitude
+        $scope.lat  = position.coords.latitude
+        $scope.long = position.coords.longitude
+        $scope.parking.location = $scope.lat+','+$scope.long    
         }, function(err) {
-            alert('cannot get location',err)
+        // error
+        alert('cannot get loc',err)
         });
-
     $http.get('http://localhost:3000/api/cars/ownerId/'+'58dfe8f77ab2422ad0be13ba')
         .then(function(res){
             console.log(res.data[0].carList);
