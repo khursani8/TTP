@@ -163,11 +163,7 @@ function ($scope, $stateParams,$http,jwtHelper,login,$ionicPopup,$timeout,$state
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http) {
-    config = {
-        headers:{
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }
+    
 
     $scope.register = function(details){
         console.log(details);

@@ -111,16 +111,47 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
   };
 })
 
-.factory('nfcService', function ($rootScope, $ionicPlatform) {
+.factory('nfcService', function ($rootScope, $ionicPlatform,$state,$ionicPopup,$http,login) {
 
         var tag = {};
+
+        $rootScope.showPopup = function() {
+                        $rootScope.data = {};
+
+                        var myPopup = $ionicPopup.show({
+                            template: '<input type="text" ng-model="data.car">',
+                            title: 'Enter Car Plate Number',
+                            scope: $rootScope,
+                            buttons: [
+                            { text: 'Cancel' },
+                            {
+                                text: '<b>Save</b>',
+                                type: 'button-positive',
+                                onTap: function(e) {
+                                if (!$rootScope.data.car) {
+                                    //don't allow the user to close unless he enters wifi password
+                                    e.preventDefault();
+                                } else {
+                                    login.getUser()
+                                      .then(user=>{
+                                          $http.put('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id,{'plateno':$rootScope.data.car,'primary':false})
+                                      })
+                                    return $rootScope.data.car;
+                                }
+                                }
+                            }
+                            ]
+                        });
+                };
 
         $ionicPlatform.ready(function() {
             nfc.addNdefListener(function (nfcEvent) {
                 console.log(JSON.stringify(nfcEvent.tag, null, 4));
                 $rootScope.$apply(function(){
                     angular.copy(nfcEvent.tag, tag);
-                    // if necessary $state.go('some-route')
+                    $rootScope.showPopup();
+                    // if necessary 
+                    $state.go('app.myCar')
                 });
             }, function () {
                 console.log("Listening for NDEF Tags.");
