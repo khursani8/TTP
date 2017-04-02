@@ -5,11 +5,19 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services','ngCordova'])
+angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives','app.services','ngCordova','angular-jwt','ngStorage','nfcFilters'])
 
-.config(function($ionicConfigProvider, $sceDelegateProvider){
+.config(function($ionicConfigProvider, $sceDelegateProvider,$httpProvider,jwtOptionsProvider){
   
-
+  jwtOptionsProvider.config({
+    whiteListedDomains: ['ttpparking.herokuapp.com'],
+      tokenGetter: ['$localStorage', function($localStorage) {
+        var token = localStorage.getItem('token');
+        console.log('tokenGetter',token)
+        return token;
+      }]
+    });
+    $httpProvider.interceptors.push('jwtInterceptor');
   $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
 
 })
@@ -28,6 +36,26 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
     }
   });
 })
+
+.service('login',['$http','$localStorage',function($http,$localStorage){
+
+  var user = {};
+
+  
+  return {
+    getToken: function(email,password){
+      return  $http.post('https://ttpparking.herokuapp.com/auth/local/',{email,password})
+        .then((res)=>{
+            user.token = res.data.token;
+            console.log('save token',user.token)
+            localStorage.setItem('token',user.token);
+    })
+  },
+  getUser: function(){
+     return $http.get('https://ttpparking.herokuapp.com/api/users/me');
+  }
+  }
+}])
 
 /*
   This directive is used to disable the "drag to open" functionality of the Side-Menu
@@ -81,4 +109,32 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
       });
     }
   };
-});
+})
+
+.factory('nfcService', function ($rootScope, $ionicPlatform) {
+
+        var tag = {};
+
+        $ionicPlatform.ready(function() {
+            nfc.addNdefListener(function (nfcEvent) {
+                console.log(JSON.stringify(nfcEvent.tag, null, 4));
+                $rootScope.$apply(function(){
+                    angular.copy(nfcEvent.tag, tag);
+                    // if necessary $state.go('some-route')
+                });
+            }, function () {
+                console.log("Listening for NDEF Tags.");
+            }, function (reason) {
+                alert("Error adding NFC Listener " + reason);
+            });
+
+        });
+
+        return {
+            tag: tag,
+
+            clearTag: function () {
+                angular.copy({}, this.tag);
+            }
+        };
+    });

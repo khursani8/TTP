@@ -3,14 +3,30 @@ angular.module('app.controllers', [])
 .controller('appCtrl', function($scope) {
 })
 
-.controller('newParkingCtrl', ['$scope', '$stateParams','$http','$cordovaGeolocation', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('newParkingCtrl', ['$scope', '$stateParams','$http','$cordovaGeolocation','login', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$cordovaGeolocation) {
+function ($scope, $stateParams,$http,$cordovaGeolocation,login) {
 
     $scope.parking = {
-        location:''
+        location:'',
     }
+
+    login.getUser()
+        .then(user=>{
+            $scope.user = user.data;
+            console.log($scope.user);
+            $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+$scope.user._id)
+                .then(function(res){
+                    console.log(res.data[0].carList);
+                    $scope.myCar = res.data[0].carList;
+                })
+
+        })
+
+    
+
+
 
     var posOptions = {timeout: 10000, enableHighAccuracy: true};
     $cordovaGeolocation
@@ -23,17 +39,13 @@ function ($scope, $stateParams,$http,$cordovaGeolocation) {
         // error
         alert(err)
         console.table('loc err',err.PositionError)
-        });
-    $http.get('http://localhost:3000/api/cars/ownerId/'+'58dfe8f77ab2422ad0be13ba')
-        .then(function(res){
-            console.log(res.data[0].carList);
-            $scope.myCar = res.data[0].carList;
-        })
-
+    });
+    
+    
     $scope.createParking = function(parking){
         parking.plate = 'lalaplate'
         if(parking){
-                $http.post('http://localhost:3000/api/parkings',parking).then(function(res){
+                $http.post('https://ttpparking.herokuapp.com/api/parkings',parking).then(function(res){
                     $scope.response = res.data;
                 })
             }
@@ -49,43 +61,94 @@ function ($scope, $stateParams) {
 
 }])
  
-.controller('extendParkingCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('extendParkingCtrl', ['$scope', '$stateParams','$http','login', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http) {
+function ($scope, $stateParams,$http,login) {
 
-$http.get('http://localhost:3000/api/cars/ownerId/'+'58dfe8f77ab2422ad0be13ba')
-        .then(function(res){
-            console.log(res.data[0].carList);
-            $scope.myCar = res.data[0].carList;
+    login.getUser()
+        .then(user=>{
+            $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id)
+                .then(function(res){
+                    console.log(res.data[0].carList);
+                    $scope.myCar = res.data[0].carList;
+                })
         })
+
+
+}
+
+])
+   
+.controller('myCarCtrl', ['$scope', '$stateParams','$http','login', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,$http,login) {
+
+
+    login.getUser()
+        .then(user=>{
+            $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id)
+                .then(function(res){
+                    console.log(res.data[0].carList);
+                    $scope.myCar = res.data[0].carList;
+                })
+        })
+
+
+}])
+
+.controller('nfcCtrl', ['$scope', '$stateParams','nfcService' ,// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams,nfcService) {
+
+$scope.tag = nfcService.tag;
+        $scope.clear = function() {
+            nfcService.clearTag();
+        };
 }])
    
-.controller('myCarCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('loginCtrl', ['$scope', '$stateParams','$http','jwtHelper','login', '$ionicPopup','$timeout','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http) {
+function ($scope, $stateParams,$http,jwtHelper,login,$ionicPopup,$timeout,$state) {
 
+    var failed = 0;
 
-$http.get('http://localhost:3000/api/cars/ownerId/'+'58dfe8f77ab2422ad0be13ba')
-        .then(function(res){
-            console.log(res.data[0].carList);
-            $scope.myCar = res.data[0].carList;
-        })
-}])
+    var loop = function(){
 
-.controller('nfcCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+        if(failed>5){
+            $ionicPopup.alert({
+                title:"Failed",
+                template:'Wrong login'
+            })
+        }
 
+        $timeout(function(){
+            if(localStorage.getItem('token')){
+            console.log('loggedin')
+            $ionicPopup.alert({
+                title:"Sucessfull",
+                template:'dah login'
+            })
+            $state.go('app.myCar')
+        }
+        else {
+            ++failed;
+            loop()
+        }
+        },500)
+    }
 
-}])
-   
-.controller('loginCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
-// You can include any angular dependencies as parameters for this function
-// TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+    $scope.tryLogin = function(email,password){
+        console.log(email,password)
+        login.getToken(email,password);
+        loop();    
+    }
+
+    
+
 
 
 }])
