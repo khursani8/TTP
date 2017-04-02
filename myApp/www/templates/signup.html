@@ -7,18 +7,18 @@
       <ion-list id="signup-list6">
         <label class="item item-input" id="signup-input17">
           <span class="input-label">Name</span>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="" ng-model="details.name">
         </label>
         <label class="item item-input" id="signup-input18">
           <span class="input-label">Email</span>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="" ng-model="details.email">
         </label>
         <label class="item item-input" id="signup-input19">
           <span class="input-label">Password</span>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="" ng-model="details.password">
         </label>
       </ion-list>
-      <button id="signup-button8" class="button button-stable  button-block" ui-sref="app.myCar">Sign up</button>
+      <button id="signup-button8" class="button button-stable  button-block" ui-sref="app.myCar" ng-click="register(details)">Sign up</button>
       <a ui-sref="app.login" id="signup-button9" class="button button-positive  button-block button-clear">Or proceed to login</a>
     </form>
   </ion-content>

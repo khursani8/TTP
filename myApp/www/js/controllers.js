@@ -18,8 +18,8 @@ function ($scope, $stateParams,$http,$cordovaGeolocation,login,$state) {
             console.log($scope.user);
             $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+$scope.user._id)
                 .then(function(res){
-                    console.log(res.data[0].carList);
-                    $scope.myCar = res.data[0].carList;
+                    // console.log(res.data[0].carList);
+                    $scope.myCar = res.data[0] ? res.data[0].carList : '';
                 })
 
         })
@@ -71,8 +71,8 @@ function ($scope, $stateParams,$http,login,$state) {
         .then(user=>{
             $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id)
                 .then(function(res){
-                    console.log(res.data[0].carList);
-                    $scope.myCar = res.data[0].carList;
+                    // console.log(res.data[0].carList);
+                     $scope.myCar = res.data[0] ? res.data[0].carList : '';
                 })
         })
 
@@ -91,8 +91,8 @@ function ($scope, $stateParams,$http,login) {
         .then(user=>{
             $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id)
                 .then(function(res){
-                    console.log(res.data[0].carList);
-                    $scope.myCar = res.data[0].carList;
+                    // console.log(res.data[0].carList);
+                     $scope.myCar = res.data[0] ? res.data[0].carList : '';
                 })
         })
 
@@ -104,10 +104,17 @@ function ($scope, $stateParams,$http,login) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,nfcService) {
 
-$scope.tag = nfcService.tag;
+        $scope.tag = '0000';
+
+        $scope.$watch('tag',function(){
+            alert(detected);
+        });
+
         $scope.clear = function() {
             nfcService.clearTag();
         };
+        $scope.tag = nfcService.tag;
+        
 }])
    
 .controller('loginCtrl', ['$scope', '$stateParams','$http','jwtHelper','login', '$ionicPopup','$timeout','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -158,11 +165,24 @@ function ($scope, $stateParams,$http,jwtHelper,login,$ionicPopup,$timeout,$state
 
 }])
    
-.controller('signupCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('signupCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams) {
+function ($scope, $stateParams,$http) {
+    config = {
+        headers:{
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
 
+    $scope.register = function(details){
+        console.log(details);
+        $http.post('https://ttpparking.herokuapp.com/api/users',details)
+            .then((res)=>{
+                console.log(res.data.token)
+                localStorage.setItem('token',res.data.token);
+            })
+    }
 
 }])
    
