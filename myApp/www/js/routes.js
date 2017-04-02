@@ -114,6 +114,6 @@ angular.module('app.routes', [])
 		}
   })
 
-$urlRouterProvider.otherwise('/app/dashboard')
+$urlRouterProvider.otherwise('/app/login')
 
 });
