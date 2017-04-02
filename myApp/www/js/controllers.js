@@ -3,10 +3,10 @@ angular.module('app.controllers', [])
 .controller('appCtrl', function($scope) {
 })
 
-.controller('newParkingCtrl', ['$scope', '$stateParams','$http','$cordovaGeolocation','login', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('newParkingCtrl', ['$scope', '$stateParams','$http','$cordovaGeolocation','login', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$cordovaGeolocation,login) {
+function ($scope, $stateParams,$http,$cordovaGeolocation,login,$state) {
 
     $scope.parking = {
         location:'',
@@ -47,6 +47,7 @@ function ($scope, $stateParams,$http,$cordovaGeolocation,login) {
         if(parking){
                 $http.post('https://ttpparking.herokuapp.com/api/parkings',parking).then(function(res){
                     $scope.response = res.data;
+										$state.go('app.dashboard')
                 })
             }
 }
@@ -61,10 +62,10 @@ function ($scope, $stateParams) {
 
 }])
  
-.controller('extendParkingCtrl', ['$scope', '$stateParams','$http','login', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('extendParkingCtrl', ['$scope', '$stateParams','$http','login', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,login) {
+function ($scope, $stateParams,$http,login,$state) {
 
     login.getUser()
         .then(user=>{
