@@ -103,6 +103,19 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
+// Upserts the given Car in the DB at the specified ID
+export function upsert1(req, res) {
+  if(req.body._id) {
+    delete req.body._id;
+  }
+  console.log(req.body);
+  return Car.findOneAndUpdate({ownerId: req.params.id}, {$push:{'carList':{'plateno':req.body.plateno,'primary':false}}}, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+
 // Updates an existing Car in the DB
 export function patch(req, res) {
   if(req.body._id) {

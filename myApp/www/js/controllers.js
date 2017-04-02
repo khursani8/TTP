@@ -99,22 +99,16 @@ function ($scope, $stateParams,$http,login) {
 
 }])
 
-.controller('nfcCtrl', ['$scope', '$stateParams','nfcService' ,// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('nfcCtrl', ['$scope', '$stateParams','nfcService','$ionicPopup' ,// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,nfcService) {
-
-        $scope.tag = '0000';
-
-        $scope.$watch('tag',function(){
-            alert(detected);
-        });
+function ($scope, $stateParams,nfcService,$ionicPopup) {
 
         $scope.clear = function() {
             nfcService.clearTag();
         };
         $scope.tag = nfcService.tag;
-        
+
 }])
    
 .controller('loginCtrl', ['$scope', '$stateParams','$http','jwtHelper','login', '$ionicPopup','$timeout','$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
@@ -205,7 +199,6 @@ function ($scope, $stateParams, $ionicPopup) {
 			template: 'This feature is not yet available.'
 		});
 	};
-
 }])
 
 .controller('dashboardCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller

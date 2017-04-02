@@ -27,7 +27,7 @@ export class CarComponent {
       });
   }
 
-  addParking() {
+  addCar() {
     if(this.newCar) {
       this.$http.post('/api/cars', {
         carList: [{'plateno':'www 1111','primary':true},{'plateno':'www 2222','primary':false}],

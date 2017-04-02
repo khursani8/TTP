@@ -11,6 +11,7 @@ router.get('/:id', controller.show);
 router.get('/ownerId/:id',auth.isAuthenticated(), controller.showCar);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);
+router.put('/ownerId/:id', controller.upsert1);
 router.patch('/:id', controller.patch);
 router.delete('/:id', controller.destroy);
 
