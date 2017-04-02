@@ -114,6 +114,6 @@ angular.module('app.routes', [])
 		}
   })
 
-$urlRouterProvider.otherwise('/app/myProfile')
+$urlRouterProvider.otherwise('/app/dashboard')
 
 });
