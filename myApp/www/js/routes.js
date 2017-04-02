@@ -104,6 +104,16 @@ angular.module('app.routes', [])
 		}
   })
 
-$urlRouterProvider.otherwise('/app/myProfile')
+	.state('app.dashboard', {
+    url: '/dashboard',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/dashboard.html',
+				controller: 'dashboardCtrl'
+			}
+		}
+  })
+
+$urlRouterProvider.otherwise('/app/dashboard')
 
 });
