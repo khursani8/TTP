@@ -86,8 +86,8 @@ function ($scope, $stateParams,$http,login,$state) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$http,login) {
 
-
-    login.getUser()
+    $scope.getCar = function(){
+        login.getUser()
         .then(user=>{
             $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id)
                 .then(function(res){
@@ -95,6 +95,9 @@ function ($scope, $stateParams,$http,login) {
                      $scope.myCar = res.data[0] ? res.data[0].carList : '';
                 })
         })
+    }
+
+    
 
 
 }])
