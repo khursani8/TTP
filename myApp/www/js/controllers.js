@@ -136,7 +136,7 @@ function ($scope, $stateParams,$http,jwtHelper,login,$ionicPopup,$timeout,$state
                 title:"Sucessfull",
                 template:'dah login'
             })
-            $state.go('app.myCar')
+            $state.go('app.dashboard')
         }
         else {
             ++failed;
