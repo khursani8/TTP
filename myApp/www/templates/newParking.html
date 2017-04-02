@@ -34,6 +34,16 @@
 					<p type="number">RM {{parking.time*2.4 | number:2}}</p>
 				</label>
 
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Payment Method
+					</div>
+					<select>
+						<option>Bank Account</option>
+						<option>Credit Card</option>
+					</select>
+				</label>
+
 				<div id="newParking-container2">
 					<button id="newParking-button3" class="button button-positive button-block" ng-click="createParking(parking)">Submit</button>
 				</div>
