@@ -123,7 +123,9 @@ function ($scope, $stateParams,$http,jwtHelper,login,$ionicPopup,$timeout,$state
                 title:"Failed",
                 template:'Wrong login'
             })
+            failed = 0;
             return
+
 
         }
 
