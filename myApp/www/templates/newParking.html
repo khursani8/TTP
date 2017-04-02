@@ -14,33 +14,28 @@
 					</select>
 				</label>
         
-        
         <label class="item item-input" id="newParking-input6">
           <span class="input-label">Location</span>
           <input type="text" placeholder="" ng-model="parking.location">
         </label>
-        
         
         <label class="item item-input" id="newParking-input7">
           <span class="input-label">Parking Lot</span>
           <input type="text" placeholder="" ng-model="parking.parkingLot" >
         </label>
         
-        
         <label class="item item-input" id="newParking-input8">
-          <span class="input-label">Set Time</span>
-          <input type="number" placeholder="" ng-model="parking.time" ng-init="parking.time=30">
-        </label>
-        
-        
-        <label class="item item-input" id="newParking-input9">
-          <span class="input-label">Total</span>
-          <input type="number" placeholder="" ng-model="parking.price" ng-init="parking.price=30">
-        </label>
+					<span class="input-label">Set Time</span>
+					<input type="number" placeholder="00" ng-model="parking.time" ng-init="parking.time=30">
+				</label>
 
-				<div id="newParking-container2" class="row">
-					<button id="newParking-button1" class="button button-positive  button-block button-outline col button-margin" type="reset">Clear</button>
-					<button id="newParking-button3" class="button button-positive  button-block col button-margin" ng-click="createParking(parking)">Next</button>
+				<label class="item item-input" id="newParking-input9">
+					<span class="input-label">Total</span>
+					<p type="number">RM {{parking.time*2.4 | number:2}}</p>
+				</label>
+
+				<div id="newParking-container2">
+					<button id="newParking-button3" class="button button-positive button-block" ng-click="createParking(parking)">Submit</button>
 				</div>
       </form>
     </div>
