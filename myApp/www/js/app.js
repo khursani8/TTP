@@ -9,15 +9,15 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
 
 .config(function($ionicConfigProvider, $sceDelegateProvider,$httpProvider,jwtOptionsProvider){
   
-  jwtOptionsProvider.config({
-    whiteListedDomains: ['ttpparking.herokuapp.com'],
-      tokenGetter: ['$localStorage', function($localStorage) {
-        var token = localStorage.getItem('token');
-        console.log('tokenGetter',token)
-        return token;
-      }]
-    });
-    $httpProvider.interceptors.push('jwtInterceptor');
+  // jwtOptionsProvider.config({
+  //   whiteListedDomains: ['ttpparking.herokuapp.com'],
+  //     tokenGetter: ['$localStorage', function($localStorage) {
+  //       var token = localStorage.getItem('token');
+  //       console.log('tokenGetter',token)
+  //       return token;
+  //     }]
+  //   });
+  //   $httpProvider.interceptors.push('jwtInterceptor');
   $sceDelegateProvider.resourceUrlWhitelist([ 'self','*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
 
 })
@@ -36,26 +36,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
     }
   });
 })
-
-.service('login',['$http','$localStorage',function($http,$localStorage){
-
-  var user = {};
-
-  
-  return {
-    getToken: function(email,password){
-      return  $http.post('https://ttpparking.herokuapp.com/auth/local/',{email,password})
-        .then((res)=>{
-            user.token = res.data.token;
-            console.log('save token',user.token)
-            localStorage.setItem('token',user.token);
-    })
-  },
-  getUser: function(){
-     return $http.get('https://ttpparking.herokuapp.com/api/users/me');
-  }
-  }
-}])
 
 /*
   This directive is used to disable the "drag to open" functionality of the Side-Menu
@@ -111,47 +91,19 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
   };
 })
 
-.factory('nfcService', function ($rootScope, $ionicPlatform,$state,$ionicPopup,$http,login) {
+.factory('nfcService', function ($rootScope, $ionicPlatform,$state,$ionicPopup,$http) {
 
         var tag = {};
-
-        $rootScope.showPopup = function() {
-                        $rootScope.data = {};
-
-                        var myPopup = $ionicPopup.show({
-                            template: '<input type="text" ng-model="data.car">',
-                            title: 'Enter Car Plate Number',
-                            scope: $rootScope,
-                            buttons: [
-                            { text: 'Cancel' },
-                            {
-                                text: '<b>Save</b>',
-                                type: 'button-positive',
-                                onTap: function(e) {
-                                if (!$rootScope.data.car) {
-                                    //don't allow the user to close unless he enters wifi password
-                                    e.preventDefault();
-                                } else {
-                                    login.getUser()
-                                      .then(user=>{
-                                          $http.put('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id,{'plateno':$rootScope.data.car,'primary':false})
-                                      })
-                                    return $rootScope.data.car;
-                                }
-                                }
-                            }
-                            ]
-                        });
-                };
 
         $ionicPlatform.ready(function() {
             nfc.addNdefListener(function (nfcEvent) {
                 console.log(JSON.stringify(nfcEvent.tag, null, 4));
                 $rootScope.$apply(function(){
+                  console.log('dah dpt',tag);
                     angular.copy(nfcEvent.tag, tag);
-                    $rootScope.showPopup();
                     // if necessary 
-                    $state.go('app.myCar')
+                    console.log('goto the newparking');
+                    $state.go('app.newParking')
                 });
             }, function () {
                 console.log("Listening for NDEF Tags.");
