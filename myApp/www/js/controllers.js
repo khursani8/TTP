@@ -169,8 +169,13 @@ function ($scope, $stateParams, $ionicPopup) {
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 
-    $scope.hour = 0
-    $scope.minute = 10 + $stateParams.extend
+    count = 0;
+    if(!count){
+        $scope.minute = 10;
+    }
+
+    $scope.minute = ($scope.minute + $stateParams.extend) % 60
+    $scope.hour = Math.floor(($scope.minute + $stateParams.extend) / 60)
 
 }])
 
