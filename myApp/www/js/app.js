@@ -91,6 +91,47 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
   };
 })
 
+/*
+  This directive is used with chat stuff.
+*/
+.directive('input', function($timeout) {
+			return {
+				restrict: 'E',
+				scope: {
+					'returnClose': '=',
+					'onReturn': '&',
+					'onFocus': '&',
+					'onBlur': '&'
+				},
+				link: function(scope, element, attr) {
+					element.bind('focus', function(e) {
+						if (scope.onFocus) {
+							$timeout(function() {
+								scope.onFocus();
+							});
+						}
+					});
+					element.bind('blur', function(e) {
+						if (scope.onBlur) {
+							$timeout(function() {
+								scope.onBlur();
+							});
+						}
+					});
+					element.bind('keydown', function(e) {
+						if (e.which == 13) {
+							if (scope.returnClose) element[0].blur();
+							if (scope.onReturn) {
+								$timeout(function() {
+									scope.onReturn();
+								});
+							}
+						}
+					});
+				}
+			}
+		})
+
 .factory('nfcService', function ($rootScope, $ionicPlatform,$state,$ionicPopup,$http) {
 
         var tag = {};
@@ -120,4 +161,4 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives
                 angular.copy({}, this.tag);
             }
         };
-    });
+    });	
