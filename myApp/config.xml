@@ -23,6 +23,9 @@
   <allow-navigation href="http://172.16.72.115:8100"/>
   <allow-navigation href="http://172.16.72.146:8100"/>
   <allow-navigation href="http://24.0.0.106:8100"/>
+	<allow-navigation href="http://0.0.0.0"/>
+	<allow-intent href="http://*/*" launch-external="yes"/>
+	<allow-intent href="https://*/*" launch-external="yes"/>
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
