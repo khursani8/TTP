@@ -114,6 +114,16 @@ angular.module('app.routes', [])
 		}
   })
 
+	.state('app.dashboard2', {
+    url: '/dashboard2',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/dashboard2.html',
+				controller: 'dashboard2Ctrl'
+			}
+		}
+  })
+
 $urlRouterProvider.otherwise('/app/login')
 
 });

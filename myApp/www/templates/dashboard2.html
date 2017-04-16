@@ -1,0 +1,28 @@
+<ion-view title="Dashboard" id="page10">
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right" class="has-header">
+    <button class="button button-dark icon ion-android-add" ui-sref="app.newParking"> New parking</button>
+  </ion-nav-buttons>
+  <ion-content padding="true" style="background: url(img/0d2SWmZiQGuzq6zSR55i_Screen20Shot202017-04-0220at2006.40.23.png) no-repeat center;background-size:cover;" class="has-header">
+		<div class="list card" id="dasbhboardActiveParking1">
+			<div class="item item-divider item-dark">
+				<span>Active Parking</span>
+				<span class="item-note">WWW 8888</span>
+			</div>
+      <ion-item class="item-icon-right" id="parkingHistory-list-item36">Bandar Universiti
+        <span class="item-note">Lot 40</span>
+        <i class="icon ion-ios-location-outline"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" id="parkingHistory-list-item37">Time remaining
+        <span class="item-note">3 Hour 00 Min</span>
+        <i class="icon ion-android-time"></i>
+      </ion-item>
+			<div class="button-bar">
+				<button class="button button-positive" ui-sref="app.extendParking">Extend</button>
+				<button class="button button-assertive">Exit</button>
+			</div>
+    </div>
+	</ion-content>
+</ion-view>
