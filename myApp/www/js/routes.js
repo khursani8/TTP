@@ -106,6 +106,13 @@ angular.module('app.routes', [])
 
 	.state('app.dashboard', {
     url: '/dashboard',
+		params:{
+			extend:{
+				value:'',
+				squash: true
+			},
+			hiddenParam:'YES'
+		},
 		views: {
 			'menuContent' :{
 				templateUrl: 'templates/dashboard.html',
