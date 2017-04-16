@@ -3,14 +3,16 @@ angular.module('app.controllers', [])
 .controller('appCtrl', function($scope) {
 })
 
-.controller('newParkingCtrl', ['$scope', '$stateParams','$http','$cordovaGeolocation', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('newParkingCtrl', ['$scope', '$stateParams','$http','$cordovaGeolocation', '$state','Car', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$cordovaGeolocation,$state) {
+function ($scope, $stateParams,$http,$cordovaGeolocation,$state,Car) {
 
     $scope.parking = {
         location:'',
     }
+
+    $scope.myCar = Car.getCar();
 
     // login.getUser()
     //     .then(user=>{
@@ -28,7 +30,7 @@ function ($scope, $stateParams,$http,$cordovaGeolocation,$state) {
 
 
 
-    var posOptions = {timeout: 10000, enableHighAccuracy: true};
+    var posOptions = {timeout: 5000, enableHighAccuracy: true};
     $cordovaGeolocation
         .getCurrentPosition(posOptions)
         .then(function (position) {
@@ -37,7 +39,10 @@ function ($scope, $stateParams,$http,$cordovaGeolocation,$state) {
         $scope.parking.location = $scope.lat+','+$scope.long;
         }, function(err) {
         // error
-        alert(err)
+        $scope.lat  = 4.3853
+        $scope.long = 100.9727
+        $scope.parking.location = $scope.lat+','+$scope.long;
+        // alert(err)
         // console.table('loc err',err.PositionError)
     });
     
@@ -65,11 +70,13 @@ function ($scope, $stateParams) {
     //     })
 }])
  
-.controller('extendParkingCtrl', ['$scope', '$stateParams','$http', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('extendParkingCtrl', ['$scope', '$stateParams','$http', '$state','Car', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http,$state) {
+function ($scope, $stateParams,$http,$state,Car) {
 
+
+    $scope.myCar = Car.getCar();
     // login.getUser()
     //     .then(user=>{
     //         $http.get('https://ttpparking.herokuapp.com/api/cars/ownerId/'+user.data._id)
@@ -84,13 +91,13 @@ function ($scope, $stateParams,$http,$state) {
 
 ])
    
-.controller('myCarCtrl', ['$scope', '$stateParams','$http', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('myCarCtrl', ['$scope', '$stateParams','$http','Car', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams,$http) {
+function ($scope, $stateParams,$http,Car) {
 
 
-    
+    $scope.myCar = Car.getCar();
 
 
 }])
