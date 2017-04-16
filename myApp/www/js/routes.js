@@ -124,6 +124,16 @@ angular.module('app.routes', [])
 		}
   })
 
+	.state('app.chat', {
+    url: '/chat',
+		views: {
+			'menuContent' :{
+				templateUrl: 'templates/chat.html',
+				controller: 'chatCtrl'
+			}
+		}
+  })
+
 $urlRouterProvider.otherwise('/app/login')
 
 });
